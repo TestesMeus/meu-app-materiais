@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "meu-app-materiais",
+    "slug": "meu-app-materiais",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/X.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/X.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/X.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/X.png"
+    }
+  }
+}
