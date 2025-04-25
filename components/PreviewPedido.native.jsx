@@ -2,26 +2,23 @@ import React from 'react';
 import {
   View,
   Text,
-  ScrollView,
   TouchableOpacity,
   Alert,
   StyleSheet
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // ou use outra lib de ícones
+import { Ionicons } from '@expo/vector-icons';
 
 const PreviewPedido = ({ formData, itens, voltar, removerItem }) => {
   const API_URL = '/api/enviar-pedido'; // substitua conforme necessário
 
   const resetarFluxo = () => {
-    // Em React Native, navegação costuma ser feita via react-navigation
-    // Aqui pode ser um redirect pra a tela inicial
     Alert.alert('Pedido enviado!', 'Você será redirecionado.');
-    // Ex: navigation.navigate('Inicio')
+    // Exemplo: navigation.navigate('Inicio')
   };
 
   const enviarParaTelegram = async () => {
     try {
-      const response = await fetch(`${API_URL}`, {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +33,14 @@ const PreviewPedido = ({ formData, itens, voltar, removerItem }) => {
         }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        throw new Error(`Resposta inválida do servidor: ${text}`);
+      }
+
       if (data.success) {
         Alert.alert('✅ Sucesso', 'Pedido enviado ao grupo do Telegram!');
         resetarFluxo();
@@ -51,16 +55,18 @@ const PreviewPedido = ({ formData, itens, voltar, removerItem }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Confirme o Pedido</Text>
-  
+
       <Info label="Contrato:" value={formData.contrato} />
       <Info label="Encarregado:" value={formData.encarregado} />
       <Info label="Obra:" value={formData.obra} />
       <Info label="Solicitante:" value={formData.solicitante} />
       <Info label="Ordem de Serviço:" value={formData.os} />
-  
+
       <Text style={styles.subTitle}>Materiais:</Text>
       {itens.length === 0 ? (
-        <Text style={{ color: 'gray', fontStyle: 'italic' }}>Nenhum item adicionado.</Text>
+        <Text style={{ color: 'gray', fontStyle: 'italic' }}>
+          Nenhum item adicionado.
+        </Text>
       ) : (
         itens.map((item, index) => (
           <View key={index} style={styles.materialItem}>
@@ -76,7 +82,7 @@ const PreviewPedido = ({ formData, itens, voltar, removerItem }) => {
           </View>
         ))
       )}
-  
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.voltarButton} onPress={voltar}>
           <Text style={styles.buttonText}>← Voltar</Text>

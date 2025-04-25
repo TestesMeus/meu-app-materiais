@@ -4,11 +4,11 @@
     "slug": "meu-app-materiais",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/X.png",
+    "icon": "./assets/P-X.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/X.png",
+      "image": "./assets/P-X.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,12 +17,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/X.png",
+        "foregroundImage": "./assets/P-X.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "pedidos.marica"
     },
     "web": {
-      "favicon": "./assets/X.png"
+      "favicon": "./assets/P-X.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "81ed1fd0-0483-4490-aeaf-b63b3c68f921"
+      }
     }
   }
 }
